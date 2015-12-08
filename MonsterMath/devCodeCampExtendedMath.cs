@@ -106,8 +106,50 @@ namespace MonsterMath
         {
 
         }
+        static public List<int> numberOfVamps(int numberToFind)
+            {
+                List<int> myVamps = new List<int>();
+                int checkNumber = 1258;
+                while (numberToFind > myVamps.Count)
+                {
+                    int checkNumberLenEven = checkNumber.ToString().Length % 2;
+                    if (checkNumberLenEven == 0)
+                    {
+                        if (isAVamp(checkNumber))
+                        {
+                            myVamps.Add(checkNumber);
+                            checkNumber++;
+                        }
+                        else
+                            checkNumber++;
+                    }
+                    else
+                        checkNumber++;
+                }
+                return myVamps;
+            }
 
+            static private bool isAVamp(int number)
+            {
+                int numHalfLen = number.ToString().Length / 2;
+                string leftHalf, rightHalf;
+                leftHalf = number.ToString().Substring(0, numHalfLen);
+                rightHalf = number.ToString().Substring(numHalfLen, numHalfLen);
+                int leftHalfInt = reverseStringAndInt(leftHalf);
+                int rightHalfInt = int.Parse(rightHalf);
 
-
-    }
+                if (number == leftHalfInt * rightHalfInt)
+                {
+                    return true;
+                }
+                else
+                    return false;
+            }
+            static private int reverseStringAndInt(string incString)
+            {
+                char[] stringArray = incString.ToCharArray();
+                Array.Reverse(stringArray);
+                return int.Parse(new string(stringArray));
+            }
+     }
 }
