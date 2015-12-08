@@ -53,10 +53,39 @@ namespace MonsterMath
         }
 
 
-        public static int makeHappyNumbersUpTo(int myNum)
+        public static List<int> getHappyNumbersUpToo(int numberOfHappy)
         {
-            int myHappy=1;
-            return myHappy;
+            List<int> happyNumberList = new List<int>();
+            int checkNumber = 1;
+            while (numberOfHappy >= happyNumberList.Count())
+            {
+                if (getHappy(checkNumber))
+                {
+                    happyNumberList.Add(checkNumber);
+                }
+                checkNumber++;
+            }
+            return happyNumberList;
+        }
+        static private bool getHappy(int number)
+        {
+            List<int> seenNumbers = new List<int>();
+            int sum = 0;
+            while (number != 1)
+            {
+                if (seenNumbers.Contains(number))
+                    return false;
+                seenNumbers.Add(number);
+                while (number != 0)
+                {
+                    int digit = number % 10;
+                    sum += digit * digit;
+                    number /= 10;
+                }
+                number = sum;
+                sum = 0;
+            }
+            return true;
         }
         public static int findGreatistCommonFactor(int numb1, int numb2)
         {
