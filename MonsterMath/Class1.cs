@@ -26,6 +26,32 @@ namespace MonsterMath
             }
             return result.ToString();
         }
+        public static string romanToInt(ref string romanNumb)
+        {
+            Dictionary<char, int> romanNumberDict = new Dictionary<char, int> { { 'I', 1 }, { 'V', 5 }, { 'X', 10 }, { 'L', 50 }, { 'C', 100 }, { 'D', 500 }, { 'M', 1000 } };
+            int returnValue = 0, pastNumber = 0, currentNumber;
+
+            foreach (char letter in romanNumb)
+            {
+                if (!romanNumberDict.ContainsKey(letter))
+                    return "0";
+                currentNumber = romanNumb[letter];
+                returnValue += currentNumber;
+                if (currentNumber != 0 && pastNumber < currentNumber)
+                {
+                    if (pastNumber == 1 && (currentNumber == 5 || currentNumber == 10)
+                        || pastNumber == 10 && (currentNumber == 50 || currentNumber == 100)
+                        || pastNumber == 100 && (currentNumber == 500 || currentNumber == 1000))
+                        returnValue -= 2 * pastNumber;
+                    else
+                        return "0";
+                    pastNumber = currentNumber;
+                }
+            }
+                return returnValue.ToString();      
+            
+        }
+
 
         public static int makeHappyNumbersUpTo(int myNum)
         {
