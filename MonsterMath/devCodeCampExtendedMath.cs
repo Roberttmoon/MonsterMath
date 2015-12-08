@@ -102,10 +102,6 @@ namespace MonsterMath
             }
             return numb1;
         }
-        public static void theThirdOne()
-        {
-
-        }
         static public List<int> numberOfVamps(int numberToFind)
             {
                 List<int> myVamps = new List<int>();
